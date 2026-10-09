@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco LOVE Lanka | Handcrafted Coconut Shell Jewelry, Batik & Natural Goods</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display for rustic elegance & Plus Jakarta Sans for clean modern readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- GSAP & ScrollTrigger Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            forest: '#1B3B2B',   // Deep palm green
+                            leaf: '#3A6346',     // Vibrant tropical leaf
+                            terracotta: '#C15C3D',// Batik warm clay
+                            coconut: '#3E2723',  // Polished shell dark wood
+                            amber: '#D4A373',    // Handloom golden weave
+                            cream: '#FAF6F0',    // Natural linen parchment
+                            sand: '#F2E8DC',     // Soft earth neutral
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF6F0;
+            color: #2C2C2C;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F2E8DC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3A6346;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1B3B2B;
+        }
+
+        /* Glassmorphism Navigation */
+        .glass-nav {
+            background: rgba(250, 246, 240, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 163, 115, 0.2);
+        }
+
+        /* Hero Floating Canvas / Effects */
+        .badge-pulse {
+            animation: pulse-border 2.5s infinite;
+        }
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(193, 92, 61, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(193, 92, 61, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(193, 92, 61, 0); }
+        }
+
+        /* Card Hover Effects */
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -10px rgba(27, 59, 43, 0.12);
+        }
+
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .product-card:hover .img-zoom-container img {
+            transform: scale(1.08);
+        }
+
+        /* Ambient glowing circles */
+        .ambient-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.35;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-brand-forest text-brand-sand text-xs py-2 px-4 text-center tracking-wider font-medium flex justify-between items-center px-6 md:px-12">
+        <span class="hidden sm:inline"><i class="fa-solid fa-leaf text-brand-amber mr-1"></i> 100% Eco-Friendly Sri Lankan Craftsmanship</span>
+        <span class="mx-auto sm:mx-0">🌿 Worldwide Plastic-Free Express Shipping Available!</span>
+        <div class="hidden sm:flex items-center gap-4 text-xs text-brand-amber">
+            <span><i class="fa-solid fa-phone text-xs mr-1"></i> +94 77 123 4567</span>
+            <span><i class="fa-solid fa-envelope text-xs mr-1"></i> hello@ecolovelanka.com</span>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 glass-nav transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-full bg-brand-forest flex items-center justify-center text-brand-amber shadow-md group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-spa text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-serif text-2xl font-bold tracking-tight text-brand-forest block leading-none">Eco LOVE Lanka</span>
+                    <span class="text-[10px] tracking-widest text-brand-terracotta uppercase font-semibold">Artisan Eco Crafts</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-700">
+                <a href="#hero" class="hover:text-brand-forest transition-colors py-1 border-b-2 border-transparent hover:border-brand-terracotta">Home</a>
+                <a href="#about" class="hover:text-brand-forest transition-colors py-1 border-b-2 border-transparent hover:border-brand-terracotta">Our Story</a>
+                <a href="#collections" class="hover:text-brand-forest transition-colors py-1 border-b-2 border-transparent hover:border-brand-terracotta">Creations</a>
+                <a href="#materials" class="hover:text-brand-forest transition-colors py-1 border-b-2 border-transparent hover:border-brand-terracotta">Materials</a>
+                <a href="#impact" class="hover:text-brand-forest transition-colors py-1 border-b-2 border-transparent hover:border-brand-terracotta">Sustainability</a>
+                <a href="#contact" class="hover:text-brand-forest transition-colors py-1 border-b-2 border-transparent hover:border-brand-terracotta">Contact</a>
+            </nav>
+
+            <!-- Header Action Icons -->
+            <div class="flex items-center gap-4">
+                <!-- Search Button -->
+                <button onclick="toggleSearchModal()" class="w-10 h-10 rounded-full flex items-center justify-center text-gray-700 hover:bg-brand-sand transition-colors" title="Search">
+                    <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                </button>
+
+                <!-- Custom Request CTA -->
+                <button onclick="openCustomOrderModal()" class="hidden lg:flex items-center gap-2 bg-brand-terracotta text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-opacity-90 transition-all shadow-sm">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    Bespoke Order
+                </button>
+
+                <!-- Cart Button -->
+                <button onclick="toggleCartDrawer()" class="relative w-10 h-10 rounded-full bg-brand-forest text-brand-sand flex items-center justify-center hover:bg-brand-leaf transition-colors shadow-sm" title="Cart">
+                    <i class="fa-solid fa-bag-shopping text-base"></i>
+                    <span id="cartCountBadge" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-brand-terracotta text-white text-xs font-bold flex items-center justify-center shadow">0</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-gray-800 hover:bg-brand-sand">
+                    <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-brand-cream border-b border-brand-sand px-6 py-6 shadow-xl transition-all">
+            <div class="flex flex-col gap-4 text-base font-semibold text-gray-800">
+                <a href="#hero" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Home</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Our Story</a>
+                <a href="#collections" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Creations & Products</a>
+                <a href="#materials" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Natural Materials</a>
+                <a href="#impact" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Our Eco Impact</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-brand-terracotta">Contact Us</a>
+                <hr class="border-brand-sand my-2">
+                <button onclick="toggleMobileMenu(); openCustomOrderModal();" class="w-full bg-brand-terracotta text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    Request Custom Handicraft
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="hero" class="relative pt-8 pb-20 md:py-24 overflow-hidden">
+            <!-- Ambient Light Background Elements -->
+            <div class="ambient-glow bg-brand-amber w-96 h-96 top-10 -left-20"></div>
+            <div class="ambient-glow bg-brand-leaf w-[30rem] h-[30rem] bottom-0 right-0"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Hero Text Content -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left" id="heroText">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-sand border border-brand-amber/30 text-brand-forest text-xs font-bold uppercase tracking-wider badge-pulse">
+                            <i class="fa-solid fa-seedling text-brand-terracotta"></i>
+                            Sustainable Handicrafts From Sri Lanka
+                        </div>
+                        
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-forest leading-tight">
+                            Wear Nature.<br>
+                            <span class="text-brand-terracotta italic font-normal">Cherish Heritage.</span><br>
+                            Empower Artisans.
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                            Discover exquisite handmade creations crafted from coconut shells, Sri Lankan batik, genuine leather, and authentic handloom. Every piece tells a story of sustainable elegance and rural artistry.
+                        </p>
+
+                        <!-- Hero CTA Buttons -->
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="#collections" class="bg-brand-forest text-brand-cream px-8 py-4 rounded-full font-bold shadow-lg hover:bg-brand-leaf transition-all transform hover:-translate-y-0.5 flex items-center gap-3">
+                                <span>Explore Catalog</span>
+                                <i class="fa-solid fa-arrow-right-long text-brand-amber"></i>
+                            </a>
+                            <a href="#about" class="bg-white text-brand-forest border border-brand-forest/20 px-8 py-4 rounded-full font-semibold hover:bg-brand-sand transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-play text-xs text-brand-terracotta"></i>
+                                Our Crafting Journey
+                            </a>
+                        </div>
+
+                        <!-- Key Highlights Bar -->
+                        <div class="pt-8 border-t border-brand-sand/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                            <div>
+                                <span class="block text-2xl font-serif font-bold text-brand-forest">100%</span>
+                                <span class="text-xs text-gray-600 font-medium">Natural Materials</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-serif font-bold text-brand-terracotta">Hand-carved</span>
+                                <span class="text-xs text-gray-600 font-medium">Coconut Shell Jewelry</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-serif font-bold text-brand-forest">Zero</span>
+                                <span class="text-xs text-gray-600 font-medium">Plastic Waste Policy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual Collage -->
+                    <div class="lg:col-span-5 relative" id="heroVisual">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <!-- Main Featured Image Banner -->
+                            <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white">
+                                <img src="https://images.unsplash.com/photo-1611591475281-a1d9a8a728d2?auto=format&fit=crop&w=800&q=80" 
+                                     alt="Coconut shell handcrafted earrings" 
+                                     class="w-full h-[420px] object-cover"
+                                     onerror="this.src='https://placehold.co/800x800/3E2723/FAF6F0?text=Coconut+Shell+Jewelry'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
+                                    <div class="text-white">
+                                        <span class="text-xs font-bold tracking-widest text-brand-amber uppercase block">Signature Craft</span>
+                                        <h3 class="font-serif text-xl font-bold">Carved Coconut Shell Jewelry</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Badge Card 1 -->
+                            <div class="absolute -bottom-6 -left-6 z-20 bg-white p-4 rounded-2xl shadow-xl border border-brand-sand flex items-center gap-3 hidden sm:flex">
+                                <div class="w-12 h-12 rounded-xl bg-brand-sand flex items-center justify-center text-brand-terracotta text-xl">
+                                    <i class="fa-solid fa-gem"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500 font-medium">Finishing</p>
+                                    <p class="text-sm font-bold text-brand-forest">Natural Wax & Oils</p>
+                                </div>
+                            </div>
+
+                            <!-- Floating Badge Card 2 -->
+                            <div class="absolute -top-6 -right-6 z-20 bg-brand-forest text-white p-4 rounded-2xl shadow-xl flex items-center gap-3 hidden sm:flex">
+                                <div class="w-10 h-10 rounded-full bg-brand-terracotta flex items-center justify-center text-white">
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-brand-sand">Made in Sri Lanka</p>
+                                    <p class="text-sm font-bold">Ethical Handloom & Batik</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Natural Materials Showcase -->
+        <section id="materials" class="py-16 bg-white border-y border-brand-sand">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-brand-terracotta font-semibold text-xs uppercase tracking-widest block mb-2">Sustainable Foundation</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-forest">Nature's Gift, Sculpted by Artisans</h2>
+                    <p class="text-gray-600 mt-3 text-sm sm:text-base">We upcycle organic natural elements into high-fashion durable artisan accessories.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Material 1: Coconut Shell -->
+                    <div class="bg-brand-cream p-6 rounded-2xl border border-brand-sand hover:border-brand-amber transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-coconut text-brand-amber flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cookie-bite"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-brand-forest mb-2">Upcycled Coconut Shell</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">Rescued from agricultural byproduct, sanded and polished to reveal dark golden wood grain textures.</p>
+                    </div>
+
+                    <!-- Material 2: Sri Lankan Batik -->
+                    <div class="bg-brand-cream p-6 rounded-2xl border border-brand-sand hover:border-brand-amber transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-terracotta text-white flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-brand-forest mb-2">Heritage Batik Dye</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">Traditional wax-resist dyed cotton textiles featuring traditional motifs and vivid tropical hues.</p>
+                    </div>
+
+                    <!-- Material 3: Handloom Fabrics -->
+                    <div class="bg-brand-cream p-6 rounded-2xl border border-brand-sand hover:border-brand-amber transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-leaf text-white flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-scroll"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-brand-forest mb-2">Pure Handloom Cotton</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">Woven on wooden looms by rural women artisans using 100% natural eco-yarns.</p>
+                    </div>
+
+                    <!-- Material 4: Genuine Leather -->
+                    <div class="bg-brand-cream p-6 rounded-2xl border border-brand-sand hover:border-brand-amber transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-amber text-brand-forest flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold text-brand-forest mb-2">Genuine Leather & Brass</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">Responsibly sourced genuine leather accents combined with rustic hand-cast brass hardware.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase Section -->
+        <section id="collections" class="py-20 bg-brand-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                    <div>
+                        <span class="text-brand-terracotta font-semibold text-xs uppercase tracking-widest block mb-2">Curated Handcrafted Creations</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-forest">Eco LOVE Lanka Catalog</h2>
+                    </div>
+
+                    <!-- Product Category Filter Buttons -->
+                    <div class="flex flex-wrap gap-2" id="filterContainer">
+                        <button onclick="filterProducts('all')" class="filter-btn active bg-brand-forest text-white px-5 py-2 rounded-full text-xs font-bold transition-all shadow-sm">All Creations</button>
+                        <button onclick="filterProducts('jewelry')" class="filter-btn bg-white text-gray-700 hover:bg-brand-sand px-5 py-2 rounded-full text-xs font-bold transition-all border border-gray-200">Coconut Jewelry</button>
+                        <button onclick="filterProducts('batik')" class="filter-btn bg-white text-gray-700 hover:bg-brand-sand px-5 py-2 rounded-full text-xs font-bold transition-all border border-gray-200">Batik Wall Art</button>
+                        <button onclick="filterProducts('keytags')" class="filter-btn bg-white text-gray-700 hover:bg-brand-sand px-5 py-2 rounded-full text-xs font-bold transition-all border border-gray-200">Key Tags & Goods</button>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="productGrid">
+                    <!-- Product cards rendered dynamically via JavaScript below -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Story & Eco Mission Section -->
+        <section id="about" class="py-20 bg-brand-forest text-brand-cream relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-leaf/50 text-brand-amber text-xs font-semibold mb-4">
+                            <i class="fa-solid fa-hand-holding-heart"></i> Empowering Communities
+                        </div>
+                        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                            Crafted with Love in Sri Lanka, Shared with the World.
+                        </h2>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">
+                            Eco LOVE Lanka was born from a passion to protect Sri Lanka’s lush ecosystems while preserving ancient artisan crafts. Millions of discarded coconut shells are discarded daily. We intercept these natural gems, hand-sculpting them into stunning lightweight earrings, statement necklaces, bracelets, and key chains.
+                        </p>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed mb-8">
+                            Combined with hand-loomed fabrics, genuine leather trims, and traditional batik textile art, each purchase directly provides sustainable livelihoods for rural women artisans.
+                        </p>
+
+                        <!-- Key Stats Grid -->
+                        <div class="grid grid-cols-3 gap-6 border-t border-brand-leaf/60 pt-6">
+                            <div>
+                                <span class="font-serif text-3xl font-bold text-brand-amber block">25,000+</span>
+                                <span class="text-xs text-gray-300">Coconut Shells Upcycled</span>
+                            </div>
+                            <div>
+                                <span class="font-serif text-3xl font-bold text-brand-amber block">60+</span>
+                                <span class="text-xs text-gray-300">Rural Artisans Employed</span>
+                            </div>
+                            <div>
+                                <span class="font-serif text-3xl font-bold text-brand-amber block">100%</span>
+                                <span class="text-xs text-gray-300">Biodegradable Packaging</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="grid grid-cols-2 gap-4">
+                            <img src="https://images.unsplash.com/photo-1590736704728-f4730bb30770?auto=format&fit=crop&w=600&q=80" alt="Sri Lankan Batik Crafting" class="rounded-2xl shadow-xl w-full h-64 object-cover">
+                            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" alt="Handcrafted Eco Jewelry" class="rounded-2xl shadow-xl w-full h-64 object-cover mt-8">
+                        </div>
+                        <!-- Floating Quote Box -->
+                        <div class="mt-6 bg-brand-leaf/40 backdrop-blur border border-brand-amber/30 p-5 rounded-2xl text-xs italic text-brand-sand">
+                            "When you wear an Eco LOVE Lanka creation, you wear a piece of Sri Lankan soul."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Order Banner -->
+        <section class="py-16 bg-brand-sand border-y border-brand-amber/30">
+            <div class="max-w-5xl mx-auto px-4 text-center">
+                <span class="w-12 h-12 rounded-full bg-brand-terracotta text-white inline-flex items-center justify-center text-xl mb-4 shadow">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </span>
+                <h2 class="font-serif text-3xl font-bold text-brand-forest mb-3">Looking for Custom Key Tags, Corporate Gifts or Unique Batik Designs?</h2>
+                <p class="text-gray-700 text-sm max-w-2xl mx-auto mb-6">
+                    We create personalized coconut shell keychains with engraved names, wedding souvenirs, custom size batik wall hangings, and leather-embossed handloom accessories.
+                </p>
+                <button onclick="openCustomOrderModal()" class="bg-brand-forest text-brand-cream px-8 py-3.5 rounded-full font-bold text-sm hover:bg-brand-leaf transition-all shadow-md inline-flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Request Custom Quote & Mockup
+                </button>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section class="py-20 bg-brand-cream">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-xl mx-auto mb-12">
+                    <span class="text-brand-terracotta font-semibold text-xs uppercase tracking-widest block mb-2">Eco Lovers Feedback</span>
+                    <h2 class="font-serif text-3xl font-bold text-brand-forest">Loved Worldwide</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-2xl border border-brand-sand shadow-sm relative">
+                        <div class="flex text-brand-amber text-xs gap-1 mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-gray-700 italic leading-relaxed mb-4">"The coconut shell earrings are unbelievably lightweight and polished so smooth! I get compliments every time I wear them. Proud to support eco artisans in Sri Lanka!"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-brand-sand flex items-center justify-center font-bold text-brand-forest text-xs">SL</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-brand-forest">Sarah Jenkins</h4>
+                                <span class="text-[10px] text-gray-500">Melbourne, Australia</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-brand-sand shadow-sm relative">
+                        <div class="flex text-brand-amber text-xs gap-1 mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-gray-700 italic leading-relaxed mb-4">"Ordered 100 personalized coconut shell key tags for our boutique eco-resort wedding. The leather strap details and engraving quality were beyond expectation!"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-brand-sand flex items-center justify-center font-bold text-brand-forest text-xs">DP</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-brand-forest">Dilshan Perera</h4>
+                                <span class="text-[10px] text-gray-500">Colombo, Sri Lanka</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-brand-sand shadow-sm relative">
+                        <div class="flex text-brand-amber text-xs gap-1 mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-gray-700 italic leading-relaxed mb-4">"The Batik Wall Hanging added such vibrant warmth to my studio apartment. Knowing it's dyed naturally and supports artisan women makes it priceless."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-brand-sand flex items-center justify-center font-bold text-brand-forest text-xs">EM</div>
+                            <div>
+                                <h4 class="text-xs font-bold text-brand-forest">Elena Moretti</h4>
+                                <span class="text-[10px] text-gray-500">Milan, Italy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Newsletter Section -->
+        <section id="contact" class="py-16 bg-white border-t border-brand-sand">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-brand-cream rounded-3xl p-8 sm:p-12 border border-brand-sand grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7">
+                        <span class="text-brand-terracotta text-xs font-bold uppercase tracking-widest block mb-2">Stay Connected</span>
+                        <h2 class="font-serif text-3xl font-bold text-brand-forest mb-3">Join Our Eco LOVE Community</h2>
+                        <p class="text-gray-600 text-sm mb-6">Subscribe to receive exclusive new collection previews, behind-the-scenes artisan stories, and 10% off your first handcrafted purchase.</p>
+                        
+                        <form onsubmit="handleNewsletterSubmit(event)" class="flex flex-col sm:flex-row gap-3">
+                            <input type="email" required placeholder="Enter your email address" class="px-5 py-3.5 rounded-full bg-white border border-brand-sand focus:outline-none focus:border-brand-forest text-sm flex-grow">
+                            <button type="submit" class="bg-brand-forest text-white px-7 py-3.5 rounded-full text-sm font-bold hover:bg-brand-leaf transition-all shadow-sm">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-brand-sand space-y-4">
+                        <h3 class="font-serif font-bold text-brand-forest text-lg border-b pb-2">Get in Touch Directly</h3>
+                        <div class="flex items-start gap-3 text-xs text-gray-700">
+                            <i class="fa-solid fa-location-dot text-brand-terracotta text-base mt-0.5"></i>
+                            <div>
+                                <strong>Workshop & Gallery:</strong><br>
+                                45 Artisan Craft Lane, Galle Fort, Sri Lanka
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-gray-700">
+                            <i class="fa-solid fa-phone text-brand-terracotta text-base"></i>
+                            <span>+94 77 123 4567 / +94 91 223 8899</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-gray-700">
+                            <i class="fa-solid fa-envelope text-brand-terracotta text-base"></i>
+                            <span>hello@ecolovelanka.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-forest text-brand-sand pt-12 pb-8 border-t border-brand-leaf">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-9 h-9 rounded-full bg-brand-amber text-brand-forest flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-spa"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold text-white">Eco LOVE Lanka</span>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Handcrafted Sri Lankan eco-luxuries made from natural coconut shells, handloom, leather, and batik heritage arts.
+                    </p>
+                    <!-- Social Links -->
+                    <div class="flex gap-3 text-brand-amber">
+                        <a href="#" class="w-8 h-8 rounded-full bg-brand-leaf/50 flex items-center justify-center hover:bg-brand-terracotta hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-brand-leaf/50 flex items-center justify-center hover:bg-brand-terracotta hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-brand-leaf/50 flex items-center justify-center hover:bg-brand-terracotta hover:text-white transition-all"><i class="fa-brands fa-pinterest-p"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-brand-leaf/50 flex items-center justify-center hover:bg-brand-terracotta hover:text-white transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-serif font-bold text-white text-sm mb-4">Creations</h4>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li><a href="#collections" onclick="filterProducts('jewelry')" class="hover:text-brand-amber transition-colors">Coconut Shell Earrings</a></li>
+                        <li><a href="#collections" onclick="filterProducts('jewelry')" class="hover:text-brand-amber transition-colors">Carved Shell Necklaces</a></li>
+                        <li><a href="#collections" onclick="filterProducts('jewelry')" class="hover:text-brand-amber transition-colors">Coconut & Bead Bracelets</a></li>
+                        <li><a href="#collections" onclick="filterProducts('batik')" class="hover:text-brand-amber transition-colors">Sri Lankan Batik Wall Art</a></li>
+                        <li><a href="#collections" onclick="filterProducts('keytags')" class="hover:text-brand-amber transition-colors">Genuine Leather Key Tags</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sustainability -->
+                <div>
+                    <h4 class="font-serif font-bold text-white text-sm mb-4">Values & Ethics</h4>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-amber text-[10px]"></i> Zero Single-Use Plastic</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-amber text-[10px]"></i> Fair Trade Artisan Pay</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-amber text-[10px]"></i> Organic Plant Wax Polish</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-amber text-[10px]"></i> Upcycled Eco Materials</li>
+                    </ul>
+                </div>
+
+                <!-- Certification Badges -->
+                <div>
+                    <h4 class="font-serif font-bold text-white text-sm mb-4">Guaranteed Quality</h4>
+                    <div class="bg-brand-leaf/30 p-4 rounded-xl border border-brand-leaf/50 text-xs text-gray-300 space-y-2">
+                        <p><i class="fa-solid fa-shield-halved text-brand-amber mr-1"></i> Authentic Sri Lankan Artisan Certified</p>
+                        <p><i class="fa-solid fa-box-open text-brand-amber mr-1"></i> Plastic-Free Recyclable Box Packaging</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-brand-leaf/60 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 gap-4">
+                <p>&copy; 2026 Eco LOVE Lanka. All Rights Reserved. Crafted with Passion.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Craftsmanship</a>
+                    <a href="#" class="hover:text-white">Shipping & Returns</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Drawer Modal -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="toggleCartDrawer()"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300 id-cart-panel" id="cartPanel">
+                <!-- Drawer Header -->
+                <div class="p-6 bg-brand-forest text-white flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-bag-shopping text-brand-amber text-xl"></i>
+                        <h3 class="font-serif font-bold text-lg">Your Eco Bag</h3>
+                    </div>
+                    <button onclick="toggleCartDrawer()" class="text-white hover:text-brand-amber transition-colors">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items Container -->
+                <div class="flex-grow p-6 overflow-y-auto space-y-4" id="cartItemsContainer">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Drawer Footer -->
+                <div class="p-6 bg-brand-cream border-t border-brand-sand space-y-4">
+                    <div class="flex justify-between items-center text-sm font-semibold text-gray-700">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal" class="text-brand-forest font-serif font-bold text-lg">$0.00</span>
+                    </div>
+                    <p class="text-[11px] text-gray-500">Shipping calculated at checkout. Plastic-free eco packaging included free!</p>
+                    <button onclick="checkoutSimulate()" class="w-full bg-brand-terracotta text-white py-3.5 rounded-full font-bold text-sm shadow hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock"></i>
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Product Modal -->
+    <div id="quickViewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative border border-brand-sand animate-fade-in">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-brand-cream text-brand-forest flex items-center justify-center hover:bg-brand-sand transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="grid grid-cols-1 md:grid-cols-2" id="quickViewContent">
+                <!-- Dynamic Quick View content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Bespoke Order Modal -->
+    <div id="customOrderModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div class="bg-brand-cream rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-brand-amber">
+            <button onclick="closeCustomOrderModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-gray-700 flex items-center justify-center hover:bg-brand-sand">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <span class="w-10 h-10 rounded-full bg-brand-terracotta text-white inline-flex items-center justify-center mb-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </span>
+                <h3 class="font-serif text-2xl font-bold text-brand-forest">Bespoke Eco Creation</h3>
+                <p class="text-xs text-gray-600 mt-1">Tell us your custom key tag, jewelry, or batik artwork vision!</p>
+            </div>
+
+            <form onsubmit="handleCustomOrderSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Your Full Name</label>
+                    <input type="text" required placeholder="e.g. Kasun Fernando" class="w-full px-4 py-2.5 rounded-xl border border-brand-sand text-sm focus:outline-none focus:border-brand-forest bg-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Email / WhatsApp Number</label>
+                    <input type="text" required placeholder="e.g. +94 7X XXX XXXX" class="w-full px-4 py-2.5 rounded-xl border border-brand-sand text-sm focus:outline-none focus:border-brand-forest bg-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Craft Type Requested</label>
+                    <select class="w-full px-4 py-2.5 rounded-xl border border-brand-sand text-sm focus:outline-none focus:border-brand-forest bg-white">
+                        <option>Custom Engraved Coconut Key Tags</option>
+                        <option>Coconut Shell Jewelry (Earrings/Necklace)</option>
+                        <option>Custom Batik Wall Hanging</option>
+                        <option>Handloom & Leather Accessories</option>
+                        <option>Corporate Gifts / Wedding Souvenirs</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Quantity & Custom Details</label>
+                    <textarea rows="3" required placeholder="Describe quantity, colors, text for engraving, or dimensions..." class="w-full px-4 py-2.5 rounded-xl border border-brand-sand text-sm focus:outline-none focus:border-brand-forest bg-white"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-forest text-white py-3 rounded-xl font-bold text-sm shadow hover:bg-brand-leaf transition-all">
+                    Submit Request to Artisan Team
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="fixed inset-0 z-50 hidden flex items-start justify-center pt-20 p-4 bg-black/60 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative">
+            <button onclick="toggleSearchModal()" class="absolute top-4 right-4 text-gray-500 hover:text-black">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="font-serif font-bold text-lg text-brand-forest mb-4">Search Eco LOVE Lanka Creations</h3>
+            <div class="relative">
+                <input type="text" id="searchInput" onkeyup="handleSearch(this.value)" placeholder="Search coconut earrings, batik wall hanging, key tags..." class="w-full pl-10 pr-4 py-3 rounded-xl border border-brand-sand focus:outline-none focus:border-brand-forest text-sm">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400"></i>
+            </div>
+            <div id="searchResults" class="mt-4 max-h-60 overflow-y-auto space-y-2">
+                <p class="text-xs text-gray-400 italic">Type a material or item name above...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast Message Container -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <script>
+        // ==========================================
+        // PRODUCT DATABASE
+        // ==========================================
+        const products = [
+            {
+                id: 'p1',
+                name: 'Polished Coconut Shell Geometric Earrings',
+                category: 'jewelry',
+                type: 'Earrings',
+                price: 18.50,
+                rating: 4.9,
+                reviews: 32,
+                image: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80',
+                material: '100% Upcycled Coconut Shell & Eco Brass Hooks',
+                description: 'Ultra-lightweight hand-sculpted teardrop earrings. Coated with organic coconut oil wax for a sleek, dark sheen.'
+            },
+            {
+                id: 'p2',
+                name: 'Sri Lankan Heritage Batik Tapestry Wall Hanging',
+                category: 'batik',
+                type: 'Wall Hanging',
+                price: 54.00,
+                rating: 5.0,
+                reviews: 19,
+                image: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=600&q=80',
+                material: 'Hand-dyed Batik Cotton with Teak Wood Hanger',
+                description: 'Vibrant Sri Lankan floral batik motif created using traditional wax-resist technique by master artisans in Matale.'
+            },
+            {
+                id: 'p3',
+                name: 'Hand-carved Coconut Shell Pendant Necklace',
+                category: 'jewelry',
+                type: 'Necklace',
+                price: 26.00,
+                rating: 4.8,
+                reviews: 27,
+                image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80',
+                material: 'Coconut Shell, Handloom Cord & Wooden Beads',
+                description: 'Intricately etched mandala symbol on natural coconut shell husk. Fitted with adjustable organic cotton cord.'
+            },
+            {
+                id: 'p4',
+                name: 'Genuine Leather & Handloom Eco Key Tag Set',
+                category: 'keytags',
+                type: 'Key Tags',
+                price: 14.00,
+                rating: 4.9,
+                reviews: 45,
+                image: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=600&q=80',
+                material: 'Upcycled Sri Lankan Leather & Handloom Weave',
+                description: 'Durable handmade key ring featuring authentic handloom fabric accents and sturdy brass hardware.'
+            },
+            {
+                id: 'p5',
+                name: 'Carved Coconut Shell & Brass Bead Bracelet',
+                category: 'jewelry',
+                type: 'Bracelets',
+                price: 16.00,
+                rating: 4.7,
+                reviews: 14,
+                image: 'https://images.unsplash.com/photo-1611591475281-a1d9a8a728d2?auto=format&fit=crop&w=600&q=80',
+                material: 'Polished Coconut Discs & Cast Brass',
+                description: 'Smooth rounded coconut shell discs stacked with vintage Sri Lankan brass beads on flex cord.'
+            },
+            {
+                id: 'p6',
+                name: 'Tropical Lotus Hand-Dyed Batik Runner / Art',
+                category: 'batik',
+                type: 'Batik Art',
+                price: 42.00,
+                rating: 5.0,
+                reviews: 22,
+                image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=600&q=80',
+                material: 'Pure Cotton Batik Dye Work',
+                description: 'Exquisite lotus blossom artwork dyed with rich terracotta and turquoise natural hues.'
+            },
+            {
+                id: 'p7',
+                name: 'Custom Engraved Coconut Shell Key Tag',
+                category: 'keytags',
+                type: 'Key Tags',
+                price: 12.00,
+                rating: 4.9,
+                reviews: 58,
+                image: 'https://images.unsplash.com/photo-1628157582853-a796fa650a6a?auto=format&fit=crop&w=600&q=80',
+                material: 'Upcycled Coconut Shell & Genuine Leather Strap',
+                description: 'Personalized key tag precision etched with island motifs or custom name engravings.'
+            },
+            {
+                id: 'p8',
+                name: 'Handloom Cotton & Leather Travel Pouch',
+                category: 'keytags',
+                type: 'Accessories',
+                price: 32.00,
+                rating: 4.8,
+                reviews: 18,
+                image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80',
+                material: '100% Sri Lankan Handloom & Leather Trim',
+                description: 'Multi-purpose artisanal pouch woven with eco dyes and finished with genuine leather zipper pull.'
+            }
+        ];
+
+        // ==========================================
+        // APP STATE
+        // ==========================================
+        let cart = [];
+        let activeFilter = 'all';
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            initGSAP();
+        });
+
+        function initGSAP() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero section fade-in
+            gsap.from("#heroText > *", {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power2.out"
+            });
+
+            gsap.from("#heroVisual", {
+                scale: 0.95,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out",
+                delay: 0.3
+            });
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const filtered = activeFilter === 'all' ? products : products.filter(p => p.category === activeFilter);
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="product-card bg-white rounded-3xl overflow-hidden border border-brand-sand flex flex-col justify-between group">
+                    <div>
+                        <!-- Image Container -->
+                        <div class="relative img-zoom-container h-64 bg-brand-sand/50">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x600/3E2723/FAF6F0?text=${encodeURIComponent(p.name)}'">
+                            
+                            <!-- Category Badge -->
+                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-brand-forest uppercase tracking-wider shadow-sm">
+                                ${p.type}
+                            </span>
+
+                            <!-- Quick View Hover Overlay Button -->
+                            <button onclick="openQuickView('${p.id}')" class="absolute inset-0 bg-brand-forest/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white gap-2 font-bold text-xs">
+                                <span class="bg-brand-forest text-white px-4 py-2 rounded-full shadow-lg hover:bg-brand-terracotta transition-colors flex items-center gap-2">
+                                    <i class="fa-solid fa-eye"></i> Quick View
+                                </span>
+                            </button>
+                        </div>
+
+                        <!-- Card Info -->
+                        <div class="p-5">
+                            <div class="flex items-center gap-1 text-brand-amber text-xs mb-1">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold text-gray-700">${p.rating}</span>
+                                <span class="text-gray-400 text-[10px]">(${p.reviews})</span>
+                            </div>
+
+                            <h3 class="font-serif font-bold text-brand-forest text-base leading-snug mb-2 group-hover:text-brand-terracotta transition-colors">
+                                ${p.name}
+                            </h3>
+
+                            <p class="text-[11px] text-gray-500 line-clamp-2 mb-3">
+                                <i class="fa-solid fa-leaf text-brand-leaf/80 mr-1"></i>${p.material}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer / Price & Add to Cart -->
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-brand-sand/50 mt-auto">
+                        <div>
+                            <span class="text-[10px] text-gray-400 block uppercase font-semibold">Price</span>
+                            <span class="font-serif font-bold text-brand-forest text-lg">$${p.price.toFixed(2)}</span>
+                        </div>
+
+                        <button onclick="addToCart('${p.id}')" class="bg-brand-sand hover:bg-brand-forest hover:text-white text-brand-forest w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-sm" title="Add to Cart">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts(category) {
+            activeFilter = category;
+            
+            // Update Active Class on Buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-forest', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-700');
+            });
+
+            event.target.classList.remove('bg-white', 'text-gray-700');
+            event.target.classList.add('bg-brand-forest', 'text-white');
+
+            renderProducts();
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added "${product.name}" to your Eco Bag!`);
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.quantity += change;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countBadge = document.getElementById('cartCountBadge');
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            countBadge.innerText = totalCount;
+
+            const container = document.getElementById('cartItemsContainer');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400 space-y-3">
+                        <i class="fa-solid fa-basket-shopping text-4xl text-brand-sand"></i>
+                        <p class="text-sm font-medium">Your Eco Bag is currently empty.</p>
+                        <button onclick="toggleCartDrawer()" class="text-xs text-brand-terracotta font-bold underline">Explore Creations</button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center gap-4 bg-brand-cream p-3 rounded-2xl border border-brand-sand">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover">
+                        <div class="flex-grow">
+                            <h4 class="font-serif font-bold text-xs text-brand-forest line-clamp-1">${item.name}</h4>
+                            <span class="text-xs font-bold text-brand-terracotta">$${(item.price * item.quantity).toFixed(2)}</span>
+                            
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="updateQuantity('${item.id}', -1)" class="w-5 h-5 rounded-full bg-white border border-brand-sand flex items-center justify-center text-xs font-bold text-gray-600 hover:bg-brand-sand">-</button>
+                                <span class="text-xs font-bold text-brand-forest px-1">${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.id}', 1)" class="w-5 h-5 rounded-full bg-white border border-brand-sand flex items-center justify-center text-xs font-bold text-gray-600 hover:bg-brand-sand">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('cartSubtotal').innerText = `$${subtotal.toFixed(2)}`;
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            const panel = document.getElementById('cartPanel');
+
+            if (drawer.classList.contains('opacity-0')) {
+                drawer.classList.remove('opacity-0', 'pointer-events-none');
+                panel.classList.remove('translate-x-full');
+            } else {
+                panel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    drawer.classList.add('opacity-0', 'pointer-events-none');
+                }, 300);
+            }
+        }
+
+        function openQuickView(productId) {
+            const p = products.find(item => item.id === productId);
+            if (!p) return;
+
+            const modalContent = document.getElementById('quickViewContent');
+            modalContent.innerHTML = `
+                <div class="h-72 md:h-full bg-brand-sand/40">
+                    <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 md:p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-brand-terracotta uppercase tracking-widest">${p.type}</span>
+                        <h3 class="font-serif font-bold text-2xl text-brand-forest mt-1 mb-2">${p.name}</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">${p.description}</p>
+                        
+                        <div class="bg-brand-cream p-3 rounded-xl border border-brand-sand text-xs space-y-1 mb-6">
+                            <p class="font-semibold text-brand-forest"><i class="fa-solid fa-leaf text-brand-leaf mr-1"></i> Eco Material:</p>
+                            <p class="text-gray-600">${p.material}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between border-t pt-4">
+                        <span class="font-serif font-bold text-2xl text-brand-forest">$${p.price.toFixed(2)}</span>
+                        <button onclick="addToCart('${p.id}'); closeQuickView();" class="bg-brand-forest text-white px-6 py-3 rounded-full text-xs font-bold hover:bg-brand-leaf transition-all shadow flex items-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> Add to Eco Bag
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('quickViewModal').classList.remove('hidden');
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickViewModal').classList.add('hidden');
+        }
+
+        function openCustomOrderModal() {
+            document.getElementById('customOrderModal').classList.remove('hidden');
+        }
+
+        function closeCustomOrderModal() {
+            document.getElementById('customOrderModal').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleSearchModal() {
+            const modal = document.getElementById('searchModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function handleSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            if (!query.trim()) {
+                resultsContainer.innerHTML = '<p class="text-xs text-gray-400 italic">Type a material or item name above...</p>';
+                return;
+            }
+
+            const matches = products.filter(p => 
+                p.name.toLowerCase().includes(query.toLowerCase()) || 
+                p.material.toLowerCase().includes(query.toLowerCase()) ||
+                p.type.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (matches.length === 0) {
+                resultsContainer.innerHTML = '<p class="text-xs text-gray-500">No matching handicrafts found.</p>';
+                return;
+            }
+
+            resultsContainer.innerHTML = matches.map(p => `
+                <div onclick="toggleSearchModal(); openQuickView('${p.id}')" class="flex items-center gap-3 p-2 rounded-xl hover:bg-brand-cream cursor-pointer">
+                    <img src="${p.image}" class="w-10 h-10 rounded-lg object-cover">
+                    <div>
+                        <h4 class="text-xs font-bold text-brand-forest">${p.name}</h4>
+                        <span class="text-[10px] text-brand-terracotta">$${p.price.toFixed(2)}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'bg-brand-forest text-white px-5 py-3 rounded-2xl shadow-xl text-xs font-semibold flex items-center gap-3 border border-brand-amber/30 pointer-events-auto animate-bounce';
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-brand-amber text-base"></i>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast("Thank you for joining Eco LOVE Lanka! Check your inbox for 10% off.");
+            e.target.reset();
+        }
+
+        function handleCustomOrderSubmit(e) {
+            e.preventDefault();
+            closeCustomOrderModal();
+            showToast("Bespoke Order Request received! Our artisan team will contact you shortly.");
+            e.target.reset();
+        }
+
+        function checkoutSimulate() {
+            if (cart.length === 0) {
+                showToast("Your cart is empty! Add items before checkout.");
+                return;
+            }
+            showToast("Redirecting to Eco Plastic-Free Checkout...");
+            setTimeout(() => {
+                cart = [];
+                updateCartUI();
+                toggleCartDrawer();
+                showToast("Order placed successfully! Thank you for supporting Sri Lankan artisans.");
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
